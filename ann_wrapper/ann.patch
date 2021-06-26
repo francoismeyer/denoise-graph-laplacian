@@ -1,0 +1,48 @@
+*** @ann/private/ANN.cpp	2010-10-12 09:53:53.564734000 -0600
+--- @ann/private/ANN.cpp	2010-09-29 12:30:38.132537000 -0600
+***************
+*** 24,29 ****
+--- 24,31 ----
+  //		Added performance counting to annDist()
+  //----------------------------------------------------------------------
+  
++ #include <cstdlib>
++ 
+  #include "ANNx.h"					// all ANN includes
+  #include "ANNperf.h"				// ANN performance 
+  
+
+
+*** @ann/private/kd_dump.cpp	2010-10-12 10:02:16.130284000 -0600
+--- @ann/private/kd_dump.cpp	2010-09-29 12:32:11.713904000 -0600
+***************
+*** 31,36 ****
+--- 31,39 ----
+  // desired.)
+  //----------------------------------------------------------------------
+  
++ #include <cstring>
++ #include <cstdlib>
++ 
+  #include "kd_tree.h"					// kd-tree declarations
+  #include "bd_tree.h"					// bd-tree declarations
+  
+
+
+
+*** @ann/ann.m	2010-10-20 12:33:35.064783000 -0600
+--- @ann/ann.m	2010-10-20 12:34:16.347737000 -0600
+***************
+*** 107,112 ****
+--- 107,116 ----
+      error('ann:open','Data must be 2D');
+  end
+  
++ if sum(isnan(data(:))) > 0,
++     error('ann:open','Data may not contain NaN values');
++ end
++ 
+  [anno.ccls anno.cfun] = get_data_class();
+  anno.modes = modes();
+  
+
